@@ -19,8 +19,10 @@ public class ArrayPriorityQueue implements PriorityQueue{
     }
 
     public void add(int var){
-	if (_size == 0)
+	if (_size == 0){
 	    _data.add(var);
+	    _size++;
+	}
 	else{
 	    int index = 0;
 	    for (int count = 0; count < _size; count++){
