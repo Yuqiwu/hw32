@@ -26,6 +26,7 @@ public class ArrayPriorityQueue implements PriorityQueue{
 	    for (int count = 0; count < _size; count++){
 		if (var > _data.get(count)){
 		    _data.add(count, var);
+		    _size++;
 		    return;
 		}
 	    }
@@ -43,6 +44,7 @@ public class ArrayPriorityQueue implements PriorityQueue{
     public int removeMin(){
 	int temp = peekMin();
         _data.remove(0);
+	_size--;
 	return temp;
     }
 
@@ -66,28 +68,31 @@ public class ArrayPriorityQueue implements PriorityQueue{
 	sop(numLine);
 
 	//add numbers
-	
+	/*
 	int newNum = 0;
 	for (int n = 0; n < 10; n++){
 	    newNum = (int)(Math.random() * 10);
 	    numLine.add(newNum);
 	}
+	*/
 	
-	/*
 	numLine.add(1);
 	numLine.add(2);
 	numLine.add(3);
 	numLine.add(2);
 	numLine.add(1);
-	*/
+	
 	//populated queue
 	
 	sop(numLine);
 
-	//tests remove
-	sop("removing: " + numLine.peekMin());
-	numLine.removeMin();
-	sop(numLine);
+	//tests peek and remove
+
+	for (int i = 0; i < 5; i++){
+	    sop("\nremoving: " + numLine.peekMin());
+	    numLine.removeMin();
+	    sop(numLine);
+	}
 
 	
     }//end main
