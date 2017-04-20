@@ -6,17 +6,30 @@
   2017-04-20
  */
 
-public class ArrayPriorityQueue{
-    private ArrayPriorityQueue _data;
+import java.util.ArrayList;
+
+public class ArrayPriorityQueue implements PriorityQueue{
+    
+    private ArrayList<Integer> _data;
     private int _size;
 
-    public ArrayPriorityQueue{
-	_data = new ArrayList();
+    public ArrayPriorityQueue(){
+	_data = new ArrayList<Integer>();
 	_size = 0;
     }
 
     public void add(int var){
-
+	if (_size == 0)
+	    _data.add(var);
+	else{
+	    int index = 0;
+	    for (int count = 0; count < _size; count++){
+		if (var > _data.get(count)){
+		    _data.add(count, var);
+		    return;
+		}
+	    }
+	}
     }
 
     public boolean isEmpty(){
@@ -24,15 +37,59 @@ public class ArrayPriorityQueue{
     }
 
     public int peekMin(){
-	return _data[0];
+	return _data.get(0);
     }
 
     public int removeMin(){
-	int temp = _data.peekMin();
-	for (int i = 0; i < _size-1; i++)
-	    _data[i] = _data[i+1];
+	int temp = peekMin();
+        _data.remove(0);
 	return temp;
     }
-        
-}
+
+    public static void sop(Object o){
+	System.out.println(o);
+    }
+    
+    public String toString(){
+	String retStr = "";
+	for (int i:_data){
+	    retStr += i + " , ";
+	}
+	return retStr;
+    }
+
+    public static void main (String[] args){
+
+	ArrayPriorityQueue numLine = new ArrayPriorityQueue();
+
+	//empty queue
+	sop(numLine);
+
+	//add numbers
+	
+	int newNum = 0;
+	for (int n = 0; n < 10; n++){
+	    newNum = (int)(Math.random() * 10);
+	    numLine.add(newNum);
+	}
+	
+	/*
+	numLine.add(1);
+	numLine.add(2);
+	numLine.add(3);
+	numLine.add(2);
+	numLine.add(1);
+	*/
+	//populated queue
+	
+	sop(numLine);
+
+	//tests remove
+	sop("removing: " + numLine.peekMin());
+	numLine.removeMin();
+	sop(numLine);
+
+	
+    }//end main
+}//end class
 
